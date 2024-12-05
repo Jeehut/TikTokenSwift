@@ -1,5 +1,5 @@
 import Foundation
-import CryptoKit
+import Crypto
 
 extension String {
     var sha256: String {

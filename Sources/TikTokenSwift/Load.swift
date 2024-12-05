@@ -1,5 +1,5 @@
 import Foundation
-import CryptoKit
+import Crypto
 
 struct Load {    
     static func loadTiktokenBpe(vocab: Vocab, decoder: FileDecoder = FileDecoder()) async throws -> BpeRanks {

@@ -7,8 +7,16 @@ let package = Package(
     products: [
         .library(name: "TikTokenSwift", targets: ["TikTokenSwift"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-crypto.git", from: "3.10.0"),
+    ],
     targets: [
-        .target(name: "TikTokenSwift"),
+        .target(
+            name: "TikTokenSwift",
+            dependencies: [
+                .product(name: "Crypto", package: "swift-crypto"),
+            ]
+        ),
         .testTarget(name: "TikTokenSwiftTests", dependencies: ["TikTokenSwift"]),
     ]
 )
