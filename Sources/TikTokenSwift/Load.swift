@@ -107,7 +107,8 @@ struct Load {
             bpeRanks[mergedVal] = n
             n += 1
         }
-        
+
+        #if !os(Linux)
         let gpt2Validated = UserDefaults.standard.object(forKey: "tiktokenGptValidated") as? Bool ?? false
         if !gpt2Validated {
             let isValid = validateBpeGymData(encoderJsonData: encoderValidationData, mergedBpe: bpeRanks, mapDict: byteToByte, specialTokens: specialTokens)
@@ -115,7 +116,8 @@ struct Load {
                 throw TikTokenError.validation
             }
         }
-        
+        #endif
+
         return bpeRanks
     }
     
@@ -133,7 +135,8 @@ struct Load {
         }
         return ret
     }
-    
+
+    #if !os(Linux)
     static func validateBpeGymData(encoderJsonData: Data, mergedBpe: BpeRanks, mapDict: [Character: Int], specialTokens: [String: Int]) -> Bool {
         // Going old school since it's easier to compare dict to dict
         let encodedJson: [String:Int]
@@ -160,4 +163,5 @@ struct Load {
         UserDefaults.standard.setValue(true, forKey: "tiktokenGptValidated")
         return true
     }
+    #endif
 }
